@@ -16,7 +16,8 @@ using namespace std;
 int fd_array[MAX_MMAP_FILE_NUM] = {-1};
 string file_list[MAX_MMAP_FILE_NUM];
 
-void create_files(int f_size,int f_num)
+void
+create_files(int f_size,int f_num)
 {
     for(int i=0;i<f_num;i++)
     {
@@ -33,20 +34,22 @@ void create_files(int f_size,int f_num)
 }
 
 
-void close_files(int f_num)
+void
+close_files(int f_num)
 {
     for(int i=0;i<f_num;i++)
         close(fd_array[i]);
 }
 
 
-void mmap_files(int f_num)
+void
+mmap_files(int f_num)
 {
-
 
 }
 
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
     struct timespec time_start, time_end;
     long long time_fun_run;
