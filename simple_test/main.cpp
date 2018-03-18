@@ -65,10 +65,8 @@ int main(int argc, char *argv[])
     clock_gettime(CLOCK_MONOTONIC,&time_end);
     time_fun_run = 1e9*(time_end.tv_sec-time_start.tv_sec) + (time_end.tv_nsec -time_start.tv_nsec);
     printf("The fuction spend time is:%lld ns\n",time_fun_run);
-    create_files(MMAP_FILE_LENGTH,MAX_MMAP_FILE_NUM);
-
-
-    close(MAX_MMAP_FILE_NUM);
+    //create_files(MMAP_FILE_LENGTH,MAX_MMAP_FILE_NUM);
+    //close_files(MAX_MMAP_FILE_NUM);
     cout << "Hello World!" << endl;
     return 0;
 }

@@ -1,0 +1,1 @@
+cmd_/home/yfchai/CHAI_CODE/model_linux/khello.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/yfchai/CHAI_CODE/model_linux/khello.ko /home/yfchai/CHAI_CODE/model_linux/khello.o /home/yfchai/CHAI_CODE/model_linux/khello.mod.o ;  true
