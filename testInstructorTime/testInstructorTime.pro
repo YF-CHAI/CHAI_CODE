@@ -6,4 +6,5 @@ CONFIG -= qt
 SOURCES += main.c
 
 HEADERS += \
-    read_time.h
+    read_time.h \
+    instructor.h
