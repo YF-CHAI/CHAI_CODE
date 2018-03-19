@@ -52,7 +52,8 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../testInstructorTime/main.c 
 OBJECTS       = main.o
-DIST          = /opt/Qt5.9.1/5.9.1/gcc_64/mkspecs/features/spec_pre.prf \
+DIST          = ../testInstructorTime/Makefile \
+		/opt/Qt5.9.1/5.9.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.9.1/5.9.1/gcc_64/mkspecs/common/unix.conf \
 		/opt/Qt5.9.1/5.9.1/gcc_64/mkspecs/common/linux.conf \
 		/opt/Qt5.9.1/5.9.1/gcc_64/mkspecs/common/sanitize.conf \
@@ -630,7 +631,8 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../testInstructorTime/main.c ../testInstructorTime/read_time.h
+main.o: ../testInstructorTime/main.c ../testInstructorTime/read_time.h \
+		../testInstructorTime/instructor.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o main.o ../testInstructorTime/main.c
 
 ####### Install

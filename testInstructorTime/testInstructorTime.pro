@@ -8,3 +8,6 @@ SOURCES += main.c
 HEADERS += \
     read_time.h \
     instructor.h
+
+DISTFILES += \
+    Makefile
