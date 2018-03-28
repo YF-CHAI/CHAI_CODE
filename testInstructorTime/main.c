@@ -145,7 +145,7 @@ void get_instructor_time_rdtscp_ns(int ins_type, int cpu_mhz)
 
             }
             printf("RDTSCP:the CLFLUSH cost time is: %llu ns\n"\
-                   ,cycles_to_ns(cpu_mhz,result/100));
+                   ,cycles_to_ns(cpu_mhz,result/LOOP_TIME));
 
             struct timespec time_start={0,0}, time_end={0,0};
 
@@ -165,7 +165,7 @@ void get_instructor_time_rdtscp_ns(int ins_type, int cpu_mhz)
 
             }
             printf("clock_gettime(CLOCK_REALTIME, &time):the CLFLUSH cost time is:%llu s %llu ns\n", \
-                   second_time/100, nano_time/100);
+                   second_time/LOOP_TIME, nano_time/LOOP_TIME);
 
 
             second_time =0;
@@ -183,7 +183,7 @@ void get_instructor_time_rdtscp_ns(int ins_type, int cpu_mhz)
 
             }
             printf("clock_gettime(CLOCK_MONOTONIC, &time):the CLFLUSH cost time is:%llu s %llu ns\n", \
-                   second_time/100, nano_time/100);
+                   second_time/LOOP_TIME, nano_time/LOOP_TIME);
 
 
 
@@ -199,7 +199,7 @@ void get_instructor_time_rdtscp_ns(int ins_type, int cpu_mhz)
 
             }
             printf("RDTSCP:the MFENCE cost time is: %llu ns\n"\
-                   ,cycles_to_ns(cpu_mhz,result/100));
+                   ,cycles_to_ns(cpu_mhz,result/LOOP_TIME));
 
             break;
         case 2:
@@ -213,7 +213,7 @@ void get_instructor_time_rdtscp_ns(int ins_type, int cpu_mhz)
 
             }
             printf("RDTSCP:the sleep(1) cost time is: %llu ns\n"\
-                   ,cycles_to_ns(cpu_mhz,result/100));
+                   ,cycles_to_ns(cpu_mhz,result/LOOP_TIME));
 
             break;
         default:
@@ -244,7 +244,7 @@ void get_instructor_time_rdtsc_ns(int ins_type, int cpu_mhz)
 
             }
             printf("RDTSC:the CLFLUSH cost time is: %llu ns\n"\
-                   ,cycles_to_ns(cpu_mhz,result/100));
+                   ,cycles_to_ns(cpu_mhz,result/LOOP_TIME));
 
 
 
@@ -260,7 +260,7 @@ void get_instructor_time_rdtsc_ns(int ins_type, int cpu_mhz)
 
             }
             printf("RDTSC:the MFENCE cost time is: %llu ns\n"\
-                   ,cycles_to_ns(cpu_mhz,result/100));
+                   ,cycles_to_ns(cpu_mhz,result/LOOP_TIME));
 
             break;
         case 2:
@@ -274,7 +274,7 @@ void get_instructor_time_rdtsc_ns(int ins_type, int cpu_mhz)
 
             }
             printf("RDTSC:the sleep(1) cost time is: %llu ns\n"\
-                   ,cycles_to_ns(cpu_mhz,result/100));
+                   ,cycles_to_ns(cpu_mhz,result/LOOP_TIME));
 
             break;
         default:
