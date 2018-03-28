@@ -148,18 +148,42 @@ void get_instructor_time_rdtscp_ns(int ins_type, int cpu_mhz)
                    ,cycles_to_ns(cpu_mhz,result/100));
 
             struct timespec time_start={0,0}, time_end={0,0};
+
+            uint64_t second_time,nano_time;
+            second_time =0;
+            nano_time = 0;
+
             for( i =0;i<100;i++)
             {
                 clock_gettime(CLOCK_REALTIME, &time_start);
                 asm_clflush(test_buffer);
                 clock_gettime(CLOCK_REALTIME, &time_end);
                 //result += cycles_end - cycles_start;
-                printf("RDTSCP:the CLFLUSH cost time is:%llus %lluns\n", \
-                       time_end.tv_sec-time_start.tv_sec, time_end.tv_nsec-time_start.tv_nsec);
+                second_time += (time_end.tv_sec-time_start.tv_sec);
+                nano_time += (time_end.tv_nsec-time_start.tv_nsec);
+
 
             }
-            printf("RDTSCP:the CLFLUSH cost time is: %llu ns\n"\
-                   ,cycles_to_ns(cpu_mhz,result/100));
+            printf("clock_gettime(CLOCK_REALTIME, &time):the CLFLUSH cost time is:%llu s %llu ns\n", \
+                   second_time/100, nano_time/100);
+
+
+            second_time =0;
+            nano_time = 0;
+
+            for( i =0;i<100;i++)
+            {
+                clock_gettime(CLOCK_MONOTONIC, &time_start);
+                asm_clflush(test_buffer);
+                clock_gettime(CLOCK_MONOTONIC, &time_end);
+                //result += cycles_end - cycles_start;
+                second_time += (time_end.tv_sec-time_start.tv_sec);
+                nano_time += (time_end.tv_nsec-time_start.tv_nsec);
+
+
+            }
+            printf("clock_gettime(CLOCK_MONOTONIC, &time):the CLFLUSH cost time is:%llu s %llu ns\n", \
+                   second_time/100, nano_time/100);
 
 
 
