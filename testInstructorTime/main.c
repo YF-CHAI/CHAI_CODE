@@ -12,7 +12,7 @@
 #include "read_time.h"
 #include "instructor.h"
 
-
+#define LOOP_TIME 10000
 size_t string_to_size(char* str);
 char *cpuinfo(char *valname);
 int cpu_speed_mhz();
@@ -109,11 +109,11 @@ int main()
     int cpu_mhz = cpu_speed_mhz();
     get_instructor_time_rdtscp_ns(CFLUSH_TYPE,cpu_mhz);
     get_instructor_time_rdtscp_ns(MFENCE,cpu_mhz);
-    get_instructor_time_rdtscp_ns(SLEEP,cpu_mhz);
+    //get_instructor_time_rdtscp_ns(SLEEP,cpu_mhz);
 
     get_instructor_time_rdtsc_ns(CFLUSH_TYPE,cpu_mhz);
     get_instructor_time_rdtsc_ns(MFENCE,cpu_mhz);
-        get_instructor_time_rdtsc_ns(SLEEP,cpu_mhz);
+    //get_instructor_time_rdtsc_ns(SLEEP,cpu_mhz);
 
 
 
@@ -135,7 +135,7 @@ void get_instructor_time_rdtscp_ns(int ins_type, int cpu_mhz)
         uint64_t result = 0;
         switch (ins_type) {
         case 0:
-            for( i =0;i<100;i++)
+            for( i =0;i<LOOP_TIME;i++)
             {
                 cycles_start = asm_rdtscp();
                 asm_clflush(test_buffer);
@@ -153,7 +153,7 @@ void get_instructor_time_rdtscp_ns(int ins_type, int cpu_mhz)
             second_time =0;
             nano_time = 0;
 
-            for( i =0;i<100;i++)
+            for( i =0;i<LOOP_TIME;i++)
             {
                 clock_gettime(CLOCK_REALTIME, &time_start);
                 asm_clflush(test_buffer);
@@ -171,7 +171,7 @@ void get_instructor_time_rdtscp_ns(int ins_type, int cpu_mhz)
             second_time =0;
             nano_time = 0;
 
-            for( i =0;i<100;i++)
+            for( i =0;i<LOOP_TIME;i++)
             {
                 clock_gettime(CLOCK_MONOTONIC, &time_start);
                 asm_clflush(test_buffer);
@@ -189,7 +189,7 @@ void get_instructor_time_rdtscp_ns(int ins_type, int cpu_mhz)
 
             break;
         case 1:
-            for( i =0;i<100;i++)
+            for( i =0;i<LOOP_TIME;i++)
             {
                 cycles_start = asm_rdtscp();
                 asm volatile ("mfence");
@@ -203,7 +203,7 @@ void get_instructor_time_rdtscp_ns(int ins_type, int cpu_mhz)
 
             break;
         case 2:
-            for(i =0;i<100;i++)
+            for(i =0;i<LOOP_TIME;i++)
             {
                 cycles_start = asm_rdtscp();
                 sleep(1);
@@ -234,7 +234,7 @@ void get_instructor_time_rdtsc_ns(int ins_type, int cpu_mhz)
         uint64_t result = 0;
         switch (ins_type) {
         case 0:
-            for( i =0;i<100;i++)
+            for( i =0;i<LOOP_TIME;i++)
             {
                 cycles_start = asm_rdtsc();
                 asm_clflush(test_buffer);
@@ -250,7 +250,7 @@ void get_instructor_time_rdtsc_ns(int ins_type, int cpu_mhz)
 
             break;
         case 1:
-            for( i =0;i<100;i++)
+            for( i =0;i<LOOP_TIME;i++)
             {
                 cycles_start = asm_rdtsc();
                 asm volatile ("mfence");
@@ -264,7 +264,7 @@ void get_instructor_time_rdtsc_ns(int ins_type, int cpu_mhz)
 
             break;
         case 2:
-            for( i =0;i<100;i++)
+            for( i =0;i<LOOP_TIME;i++)
             {
                 cycles_start = asm_rdtsc();
                 sleep(1);
